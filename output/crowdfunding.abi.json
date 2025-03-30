@@ -1,0 +1,48 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.85.1",
+            "commitHash": "4eb161250e340c8f48f66e2b929ef4a5bed7c181",
+            "commitDate": "2025-03-15",
+            "channel": "Stable",
+            "short": "rustc 1.85.1 (4eb161250 2025-03-15)"
+        },
+        "contractCrate": {
+            "name": "crowdfunding",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.57.0"
+        }
+    },
+    "name": "Crowdfunding",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "target",
+                "type": "BigUint"
+            }
+        ],
+        "outputs": []
+    },
+    "upgradeConstructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "target",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {}
+}

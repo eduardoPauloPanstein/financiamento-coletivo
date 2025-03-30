@@ -1,0 +1,12 @@
+/home/edu/crowdfunding/target/debug/deps/libgetrandom-a33244041973ab1d.rmeta: /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lib.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error_impls.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util_libc.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/use_file.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lazy.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/linux_android_with_fallback.rs
+
+/home/edu/crowdfunding/target/debug/deps/getrandom-a33244041973ab1d.d: /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lib.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error_impls.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util_libc.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/use_file.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lazy.rs /home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/linux_android_with_fallback.rs
+
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lib.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/error_impls.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/util_libc.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/use_file.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/lazy.rs:
+/home/edu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.2.15/src/linux_android_with_fallback.rs:

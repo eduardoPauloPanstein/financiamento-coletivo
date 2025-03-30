@@ -1,0 +1,1 @@
+/home/edu/crowdfunding/target/debug/crowdfunding-meta: /home/edu/crowdfunding/meta/src/main.rs /home/edu/crowdfunding/src/crowdfunding.rs /home/edu/crowdfunding/src/crowdfunding_proxy.rs
