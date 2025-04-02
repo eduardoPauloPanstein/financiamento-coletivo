@@ -18,21 +18,42 @@
     },
     "name": "Crowdfunding",
     "constructor": {
+        "docs": [
+            "Inicializa o contrato de crowdfunding.",
+            "",
+            "# Parâmetros",
+            "- `target`: Meta de arrecadação em EGLD (BigUint).",
+            "- `deadline`: Prazo final para arrecadação, em timestamp Unix (u64).",
+            "",
+            "# Regras",
+            "- A meta (`target`) deve ser maior que 0.",
+            "- O prazo final (`deadline`) deve ser no futuro."
+        ],
         "inputs": [
             {
                 "name": "target",
                 "type": "BigUint"
+            },
+            {
+                "name": "deadline",
+                "type": "u64"
             }
         ],
         "outputs": []
     },
     "upgradeConstructor": {
+        "docs": [
+            "Atualiza o contrato inteligente. Necessário para upgrades."
+        ],
         "inputs": [],
         "outputs": []
     },
     "endpoints": [
         {
-            "name": "target",
+            "docs": [
+                "Retorna a meta de arrecadação."
+            ],
+            "name": "getTarget",
             "mutability": "readonly",
             "inputs": [],
             "outputs": [
@@ -40,9 +61,121 @@
                     "type": "BigUint"
                 }
             ]
+        },
+        {
+            "docs": [
+                "Retorna o prazo final para arrecadação."
+            ],
+            "name": "getDeadline",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Retorna o depósito de um doador específico.",
+                "",
+                "# Parâmetros",
+                "- `donor`: Endereço do doador."
+            ],
+            "name": "getDeposit",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "donor",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Permite que um usuário faça uma doação ao contrato.",
+                "",
+                "# Regras",
+                "- Apenas permitido durante o período de arrecadação (`FundingPeriod`).",
+                "- O valor doado é adicionado ao depósito do doador."
+            ],
+            "name": "fund",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Retorna o status atual do crowdfunding.",
+                "",
+                "# Possíveis Valores",
+                "- `FundingPeriod`: Ainda no período de arrecadação.",
+                "- `Successful`: Meta atingida.",
+                "- `Failed`: Meta não atingida e prazo expirado."
+            ],
+            "name": "status",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Status"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Retorna o saldo atual do contrato em EGLD."
+            ],
+            "name": "getCurrentFunds",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "docs": [
+                "Permite o saque dos fundos do contrato.",
+                "",
+                "# Regras",
+                "- Se o status for `Successful`, apenas o dono do contrato pode sacar.",
+                "- Se o status for `Failed`, os doadores podem recuperar seus depósitos."
+            ],
+            "name": "claim",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
         }
     ],
     "esdtAttributes": [],
     "hasCallback": false,
-    "types": {}
+    "types": {
+        "Status": {
+            "type": "enum",
+            "variants": [
+                {
+                    "name": "FundingPeriod",
+                    "discriminant": 0
+                },
+                {
+                    "name": "Successful",
+                    "discriminant": 1
+                },
+                {
+                    "name": "Failed",
+                    "discriminant": 2
+                }
+            ]
+        }
+    }
 }

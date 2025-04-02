@@ -43,16 +43,28 @@ where
     From: TxFrom<Env>,
     Gas: TxGas<Env>,
 {
+    /// Inicializa o contrato de crowdfunding. 
+    ///  
+    /// # Parâmetros 
+    /// - `target`: Meta de arrecadação em EGLD (BigUint). 
+    /// - `deadline`: Prazo final para arrecadação, em timestamp Unix (u64). 
+    ///  
+    /// # Regras 
+    /// - A meta (`target`) deve ser maior que 0. 
+    /// - O prazo final (`deadline`) deve ser no futuro. 
     pub fn init<
         Arg0: ProxyArg<BigUint<Env::Api>>,
+        Arg1: ProxyArg<u64>,
     >(
         self,
         target: Arg0,
+        deadline: Arg1,
     ) -> TxTypedDeploy<Env, From, NotPayable, Gas, ()> {
         self.wrapped_tx
             .payment(NotPayable)
             .raw_deploy()
             .argument(&target)
+            .argument(&deadline)
             .original_result()
     }
 }
@@ -66,6 +78,7 @@ where
     To: TxTo<Env>,
     Gas: TxGas<Env>,
 {
+    /// Atualiza o contrato inteligente. Necessário para upgrades. 
     pub fn upgrade(
         self,
     ) -> TxTypedUpgrade<Env, From, To, NotPayable, Gas, ()> {
@@ -85,12 +98,100 @@ where
     To: TxTo<Env>,
     Gas: TxGas<Env>,
 {
+    /// Retorna a meta de arrecadação. 
     pub fn target(
         self,
     ) -> TxTypedCall<Env, From, To, NotPayable, Gas, BigUint<Env::Api>> {
         self.wrapped_tx
             .payment(NotPayable)
-            .raw_call("target")
+            .raw_call("getTarget")
             .original_result()
     }
+
+    /// Retorna o prazo final para arrecadação. 
+    pub fn deadline(
+        self,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, u64> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("getDeadline")
+            .original_result()
+    }
+
+    /// Retorna o depósito de um doador específico. 
+    ///  
+    /// # Parâmetros 
+    /// - `donor`: Endereço do doador. 
+    pub fn deposit<
+        Arg0: ProxyArg<ManagedAddress<Env::Api>>,
+    >(
+        self,
+        donor: Arg0,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, BigUint<Env::Api>> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("getDeposit")
+            .argument(&donor)
+            .original_result()
+    }
+
+    /// Permite que um usuário faça uma doação ao contrato. 
+    ///  
+    /// # Regras 
+    /// - Apenas permitido durante o período de arrecadação (`FundingPeriod`). 
+    /// - O valor doado é adicionado ao depósito do doador. 
+    pub fn fund(
+        self,
+    ) -> TxTypedCall<Env, From, To, (), Gas, ()> {
+        self.wrapped_tx
+            .raw_call("fund")
+            .original_result()
+    }
+
+    /// Retorna o status atual do crowdfunding. 
+    ///  
+    /// # Possíveis Valores 
+    /// - `FundingPeriod`: Ainda no período de arrecadação. 
+    /// - `Successful`: Meta atingida. 
+    /// - `Failed`: Meta não atingida e prazo expirado. 
+    pub fn status(
+        self,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, Status> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("status")
+            .original_result()
+    }
+
+    /// Retorna o saldo atual do contrato em EGLD. 
+    pub fn get_current_funds(
+        self,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, BigUint<Env::Api>> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("getCurrentFunds")
+            .original_result()
+    }
+
+    /// Permite o saque dos fundos do contrato. 
+    ///  
+    /// # Regras 
+    /// - Se o status for `Successful`, apenas o dono do contrato pode sacar. 
+    /// - Se o status for `Failed`, os doadores podem recuperar seus depósitos. 
+    pub fn claim(
+        self,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, ()> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("claim")
+            .original_result()
+    }
+}
+
+#[type_abi]
+#[derive(TopEncode, TopDecode, PartialEq, Clone, Copy)]
+pub enum Status {
+    FundingPeriod,
+    Successful,
+    Failed,
 }

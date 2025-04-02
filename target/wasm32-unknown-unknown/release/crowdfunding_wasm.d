@@ -1,1 +1,1 @@
-/home/edu/crowdfunding/target/wasm32-unknown-unknown/release/crowdfunding_wasm.wasm: /home/edu/crowdfunding/src/crowdfunding.rs /home/edu/crowdfunding/src/crowdfunding_proxy.rs /home/edu/crowdfunding/wasm/src/lib.rs
+/home/edu/crowdfunding/target/wasm32-unknown-unknown/release/crowdfunding_wasm.wasm: /home/edu/crowdfunding/src/crowdfunding.rs /home/edu/crowdfunding/src/crowdfunding_proxy.rs /home/edu/crowdfunding/src/status.rs /home/edu/crowdfunding/wasm/src/lib.rs
